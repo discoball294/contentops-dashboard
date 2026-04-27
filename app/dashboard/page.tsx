@@ -174,42 +174,42 @@ export default function Dashboard() {
                       onPublish={handlePublish} 
                     />
                   ) : (
-                    <div className="bg-bg-panel border border-border rounded-xl p-4 flex flex-col sm:flex-row sm:items-center gap-4 hover:border-green/30 transition-all group">
-                      <div className="flex items-center gap-4 flex-1 min-w-0">
-                        <div className="w-16 h-16 rounded-lg overflow-hidden bg-bg-dark flex-shrink-0 border border-white/5">
+                    <div className="bg-bg-panel border border-border rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 hover:border-green/30 transition-all group">
+                      <div className="flex items-start sm:items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-lg overflow-hidden bg-bg-dark flex-shrink-0 border border-white/5">
                           <img src={log.image_url} alt="" className="w-full h-full object-cover" />
                         </div>
                         
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="text-[10px] font-bold text-text-muted">{log.account_handle}</span>
-                            <StatusBadge variant={log.pillar}>{log.pillar}</StatusBadge>
+                          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
+                            <span className="text-[10px] font-bold text-text-muted truncate max-w-[80px] sm:max-w-none">{log.account_handle}</span>
+                            <StatusBadge variant={log.pillar} className="scale-90 origin-left">{log.pillar}</StatusBadge>
                           </div>
-                          <h3 className="font-heading font-bold text-sm truncate group-hover:text-green transition-colors">
+                          <h3 className="font-heading font-bold text-sm sm:text-base truncate group-hover:text-green transition-colors">
                             {log.article_title}
                           </h3>
-                          <p className="text-xs text-text-muted mt-1 truncate">
+                          <p className="text-[10px] sm:text-xs text-text-muted mt-0.5 sm:mt-1 truncate">
                             {log.source} • {new Date(log.date).toLocaleDateString('id-ID')}
                           </p>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between sm:justify-end gap-4 border-t sm:border-t-0 border-border pt-3 sm:pt-0">
-                        <StatusBadge variant={log.status}>{log.status}</StatusBadge>
+                      <div className="flex items-center justify-between sm:justify-end gap-3 border-t sm:border-t-0 border-border pt-3 sm:pt-0 sm:min-w-fit">
+                        <StatusBadge variant={log.status} className="sm:text-xs">{log.status}</StatusBadge>
                         
                         <div className="flex items-center gap-2 sm:ml-4 sm:border-l sm:border-border sm:pl-4">
                           {log.status === 'pending' ? (
                             <>
                               <button 
                                 onClick={() => handleApprove(log.id)}
-                                className="p-2.5 rounded-xl bg-green/10 text-green hover:bg-green hover:text-white transition-all shadow-sm"
+                                className="p-2 sm:p-2.5 rounded-xl bg-green/10 text-green hover:bg-green hover:text-white transition-all shadow-sm flex-shrink-0"
                                 title="Approve"
                               >
                                 <Check className="w-4 h-4" />
                               </button>
                               <button 
                                 onClick={() => handleReject(log.id)}
-                                className="p-2.5 rounded-xl bg-red/10 text-red hover:bg-red hover:text-white transition-all shadow-sm"
+                                className="p-2 sm:p-2.5 rounded-xl bg-red/10 text-red hover:bg-red hover:text-white transition-all shadow-sm flex-shrink-0"
                                 title="Reject"
                               >
                                 <X className="w-4 h-4" />
@@ -218,7 +218,7 @@ export default function Dashboard() {
                           ) : log.status === 'approved' && (
                             <button 
                               onClick={() => handlePublish(log.id)}
-                              className="p-2.5 rounded-xl bg-blue/10 text-blue hover:bg-blue hover:text-white transition-all shadow-sm"
+                              className="p-2 sm:p-2.5 rounded-xl bg-blue/10 text-blue hover:bg-blue hover:text-white transition-all shadow-sm flex-shrink-0"
                               title="Publish"
                             >
                               <Send className="w-4 h-4" />
