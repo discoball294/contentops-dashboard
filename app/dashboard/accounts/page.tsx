@@ -23,14 +23,14 @@ export default function AccountsPage() {
 
   return (
     <div className="p-4 md:p-8 max-w-7xl mx-auto w-full">
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
         <div>
           <h1 className="text-2xl md:text-3xl font-heading font-bold">Brand Accounts</h1>
-          <p className="text-text-muted mt-1">Manage your brand identities and content strategies.</p>
+          <p className="text-text-muted mt-1 text-sm">Manage your brand identities and content strategies.</p>
         </div>
         <button 
           onClick={() => setShowModal(true)}
-          className="flex items-center gap-2 bg-green text-white px-6 py-3 rounded-xl font-bold hover:bg-green-light transition-all shadow-lg shadow-green/10"
+          className="flex items-center justify-center gap-2 bg-green text-white px-6 py-3 rounded-xl font-bold hover:bg-green-light transition-all shadow-lg shadow-green/10 w-full sm:w-auto"
         >
           <Plus className="w-5 h-5" /> Add Account
         </button>

@@ -70,8 +70,8 @@ export default function Dashboard() {
 
       <div className="flex flex-col gap-6">
         {/* Filters */}
-        <div className="bg-bg-panel border border-border p-4 rounded-2xl flex flex-col lg:flex-row gap-4 items-center justify-between">
-          <div className="flex flex-wrap items-center gap-2">
+        <div className="bg-bg-panel border border-border p-4 rounded-2xl flex flex-col gap-4">
+          <div className="flex flex-wrap items-center gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
             {['all', 'pending', 'approved', 'rejected', 'published'].map((status) => {
               const count = logs.filter(l => status === 'all' || l.status === status).length
               return (
@@ -79,7 +79,7 @@ export default function Dashboard() {
                   key={status}
                   onClick={() => setStatusFilter(status)}
                   className={cn(
-                    "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2",
+                    "px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 whitespace-nowrap",
                     statusFilter === status 
                       ? "bg-green text-white shadow-lg shadow-green/20" 
                       : "bg-bg-dark text-text-muted hover:text-text-primary border border-border"
@@ -95,8 +95,8 @@ export default function Dashboard() {
             })}
           </div>
 
-          <div className="flex items-center gap-3 w-full lg:w-auto">
-            <div className="relative flex-1 lg:w-64">
+          <div className="flex flex-col sm:flex-row items-center gap-3 w-full">
+            <div className="relative w-full sm:flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted" />
               <input 
                 type="text"
@@ -107,42 +107,44 @@ export default function Dashboard() {
               />
             </div>
             
-            <div className="flex items-center gap-2 bg-bg-dark border border-border px-3 py-2 rounded-xl">
-              <Filter className="w-4 h-4 text-text-muted" />
-              <select 
-                className="bg-transparent text-xs font-bold uppercase tracking-wider focus:outline-none"
-                value={pillarFilter}
-                onChange={(e) => setPillarFilter(e.target.value)}
-              >
-                <option value="all">All Pillars</option>
-                <option value="UMKM">UMKM</option>
-                <option value="Petani">Petani</option>
-                <option value="Fakta">Fakta</option>
-                <option value="Mitos">Mitos</option>
-              </select>
-            </div>
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <div className="flex items-center gap-2 bg-bg-dark border border-border px-3 py-2 rounded-xl flex-1 sm:flex-initial">
+                <Filter className="w-4 h-4 text-text-muted" />
+                <select 
+                  className="bg-transparent text-xs font-bold uppercase tracking-wider focus:outline-none w-full"
+                  value={pillarFilter}
+                  onChange={(e) => setPillarFilter(e.target.value)}
+                >
+                  <option value="all">All Pillars</option>
+                  <option value="UMKM">UMKM</option>
+                  <option value="Petani">Petani</option>
+                  <option value="Fakta">Fakta</option>
+                  <option value="Mitos">Mitos</option>
+                </select>
+              </div>
 
-            <div className="flex items-center gap-1 bg-bg-dark border border-border p-1 rounded-xl">
-              <button
-                onClick={() => setViewMode('grid')}
-                className={cn(
-                  "p-1.5 rounded-lg transition-all",
-                  viewMode === 'grid' ? "bg-green text-white shadow-sm" : "text-text-muted hover:text-text-primary"
-                )}
-                title="Grid View"
-              >
-                <LayoutGrid className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => setViewMode('list')}
-                className={cn(
-                  "p-1.5 rounded-lg transition-all",
-                  viewMode === 'list' ? "bg-green text-white shadow-sm" : "text-text-muted hover:text-text-primary"
-                )}
-                title="List View"
-              >
-                <List className="w-4 h-4" />
-              </button>
+              <div className="flex items-center gap-1 bg-bg-dark border border-border p-1 rounded-xl">
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={cn(
+                    "p-1.5 rounded-lg transition-all",
+                    viewMode === 'grid' ? "bg-green text-white shadow-sm" : "text-text-muted hover:text-text-primary"
+                  )}
+                  title="Grid View"
+                >
+                  <LayoutGrid className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={cn(
+                    "p-1.5 rounded-lg transition-all",
+                    viewMode === 'list' ? "bg-green text-white shadow-sm" : "text-text-muted hover:text-text-primary"
+                  )}
+                  title="List View"
+                >
+                  <List className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -172,40 +174,42 @@ export default function Dashboard() {
                       onPublish={handlePublish} 
                     />
                   ) : (
-                    <div className="bg-bg-panel border border-border rounded-xl p-4 flex items-center gap-4 hover:border-green/30 transition-all group">
-                      <div className="w-16 h-16 rounded-lg overflow-hidden bg-bg-dark flex-shrink-0">
-                        <img src={log.image_url} alt="" className="w-full h-full object-cover" />
-                      </div>
-                      
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-[10px] font-bold text-text-muted">{log.account_handle}</span>
-                          <StatusBadge variant={log.pillar}>{log.pillar}</StatusBadge>
+                    <div className="bg-bg-panel border border-border rounded-xl p-4 flex flex-col sm:flex-row sm:items-center gap-4 hover:border-green/30 transition-all group">
+                      <div className="flex items-center gap-4 flex-1 min-w-0">
+                        <div className="w-16 h-16 rounded-lg overflow-hidden bg-bg-dark flex-shrink-0 border border-white/5">
+                          <img src={log.image_url} alt="" className="w-full h-full object-cover" />
                         </div>
-                        <h3 className="font-heading font-bold text-sm truncate group-hover:text-green transition-colors">
-                          {log.article_title}
-                        </h3>
-                        <p className="text-xs text-text-muted mt-1 truncate">
-                          {log.source} • {new Date(log.date).toLocaleDateString('id-ID')}
-                        </p>
+                        
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-[10px] font-bold text-text-muted">{log.account_handle}</span>
+                            <StatusBadge variant={log.pillar}>{log.pillar}</StatusBadge>
+                          </div>
+                          <h3 className="font-heading font-bold text-sm truncate group-hover:text-green transition-colors">
+                            {log.article_title}
+                          </h3>
+                          <p className="text-xs text-text-muted mt-1 truncate">
+                            {log.source} • {new Date(log.date).toLocaleDateString('id-ID')}
+                          </p>
+                        </div>
                       </div>
 
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center justify-between sm:justify-end gap-4 border-t sm:border-t-0 border-border pt-3 sm:pt-0">
                         <StatusBadge variant={log.status}>{log.status}</StatusBadge>
                         
-                        <div className="flex items-center gap-1 ml-4 border-l border-border pl-4">
+                        <div className="flex items-center gap-2 sm:ml-4 sm:border-l sm:border-border sm:pl-4">
                           {log.status === 'pending' ? (
                             <>
                               <button 
                                 onClick={() => handleApprove(log.id)}
-                                className="p-2 rounded-lg bg-green/10 text-green hover:bg-green hover:text-white transition-all"
+                                className="p-2.5 rounded-xl bg-green/10 text-green hover:bg-green hover:text-white transition-all shadow-sm"
                                 title="Approve"
                               >
                                 <Check className="w-4 h-4" />
                               </button>
                               <button 
                                 onClick={() => handleReject(log.id)}
-                                className="p-2 rounded-lg bg-red/10 text-red hover:bg-red hover:text-white transition-all"
+                                className="p-2.5 rounded-xl bg-red/10 text-red hover:bg-red hover:text-white transition-all shadow-sm"
                                 title="Reject"
                               >
                                 <X className="w-4 h-4" />
@@ -214,7 +218,7 @@ export default function Dashboard() {
                           ) : log.status === 'approved' && (
                             <button 
                               onClick={() => handlePublish(log.id)}
-                              className="p-2 rounded-lg bg-blue/10 text-blue hover:bg-blue hover:text-white transition-all"
+                              className="p-2.5 rounded-xl bg-blue/10 text-blue hover:bg-blue hover:text-white transition-all shadow-sm"
                               title="Publish"
                             >
                               <Send className="w-4 h-4" />

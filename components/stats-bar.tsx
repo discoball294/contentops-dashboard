@@ -30,10 +30,10 @@ export default function StatsBar({
 
   return (
     <div className="flex flex-col gap-6 mb-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <h1 className="text-2xl md:text-3xl font-heading font-bold">Content Dashboard</h1>
         
-        <div className="flex items-center gap-2 bg-bg-panel border border-border p-1.5 rounded-xl">
+        <div className="flex items-center gap-2 bg-bg-panel border border-border p-1.5 rounded-xl w-fit">
           <Filter className="w-4 h-4 text-text-muted ml-2" />
           <select 
             className="bg-transparent text-sm font-medium focus:outline-none pr-4"

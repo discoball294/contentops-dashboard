@@ -112,7 +112,7 @@ export default function SettingsPage() {
               ))}
               
               <div className="flex justify-end pt-2">
-                <button className="flex items-center gap-2 bg-green/10 text-green border border-green/20 px-6 py-2.5 rounded-xl font-bold hover:bg-green text-sm hover:text-white transition-all">
+                <button className="flex items-center justify-center gap-2 bg-green/10 text-green border border-green/20 px-6 py-2.5 rounded-xl font-bold hover:bg-green text-sm hover:text-white transition-all w-full sm:w-auto">
                   <Save className="w-4 h-4" /> Save {section.title}
                 </button>
               </div>
